@@ -40,6 +40,11 @@
         };
         var api_response;
         $.post('http://api.what3words.com/w3w', data, function(response) {
+          if (response.error) {
+          document.getElementByID('w3w').styles.backgroundColor = 'orange';
+          //document.getElementByID('w3w').styles.font-style('italic');
+          return;
+            }
           var coordinate = ol.proj.transform([response.position[1], response.position[0]], 'EPSG:4326', 'EPSG:3857')
           console.log(response);
           console.log(coordinate);
