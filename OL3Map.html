@@ -65,7 +65,7 @@
       <div id="map" class="map"></div>
       <div id="panel" style="position:absolute;left:10px;bottom:30px;z-index:1000;background-color:White">
         <img src="what3words_logo.png" style="width:200px"><br/>
-        <input id="w3w" type="textbox" style="width:200px" value="tides.ringers.refrain">
+        <input id="w3w" type="textbox" style="width:200px" value="">
         <input type="button" value="Go" title="Go" onclick="onW3W()"/>
       </div>
     </div>
@@ -110,15 +110,15 @@
   
     
     $.post('http://api.what3words.com/position', data, function(response) {
+       document.getElementById('w3w').value = response.words;
        
-       alert(response.words);
     });
 
 
   });
       //console.log(W3W2Coords('dynamic.snares.freshest'));
       //console.log(W3W2Coords('tides.ringers.refrain'));
-      onW3W();
+      //onW3W();
   </script>
 
   </body>
