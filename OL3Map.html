@@ -22,12 +22,23 @@
         };
         var api_response;
         $.post('http://api.what3words.com/w3w', data, function(response) {
-        api_response = response;
+          
+          //api_response = response;
+          var coordinate = ol.proj.transform([response.position[1], response.position[0]], 'EPSG:4326', 'EPSG:3857')
+          console.log(response);
+          console.log(coordinate);
+          zoomToCoord(coordinate);
+
+
         });
-        return api_response;
+        
       }
 
-  console.log(W3W2Coords('prom.cape.test'));
+  function zoomToCoord(coord)
+  {
+              map.getView().setCenter([coord[0], coord[1]]);
+          map.getView().setZoom(15);
+  }
 </script>
   </head>
   <body>
@@ -46,6 +57,9 @@
           zoom: 4
         })
       });
+
+      //console.log(W3W2Coords('dynamic.snares.freshest'));
+      console.log(W3W2Coords('tides.ringers.refrain'));
     </script>
   </body>
 </html>
