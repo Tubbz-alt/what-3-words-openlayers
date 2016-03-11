@@ -40,18 +40,21 @@
         };
         var api_response;
         $.post('http://api.what3words.com/w3w', data, function(response) {
+
           if (response.error) {
-          document.getElementByID('w3w').styles.backgroundColor = 'orange';
-          //document.getElementByID('w3w').styles.font-style('italic');
+          document.getElementById('w3w').style.backgroundColor = 'yellow';
           return;
             }
+
+          document.getElementById('w3w').style.backgroundColor = 'white';
           var coordinate = ol.proj.transform([response.position[1], response.position[0]], 'EPSG:4326', 'EPSG:3857')
+          zoomToCoord(coordinate);
           console.log(response);
           console.log(coordinate);
-          zoomToCoord(coordinate);
         });
         return api_response;
       }
+
   function zoomToCoord(coord)
   {
     map.getView().setCenter([coord[0], coord[1]]);
