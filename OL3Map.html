@@ -13,15 +13,21 @@
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js" type="text/javascript"></script>
     <title>OpenLayers 3 example</title>
 	<script>
-		data = {
-			'key':		'ZPGEPCSM',
-			'string':	'prom.cape.pump'
-		};
+  var api = 'ZPGEPCSM';
+     function W3W2Coords(words)
+     {
+        data = {
+          'key': api,
+          'string': words
+        };
+        var api_response;
+        $.post('http://api.what3words.com/w3w', data, function(response) {
+        api_response = response;
+        });
+        return api_response;
+      }
 
-		$.post('http://api.what3words.com/w3w', data, function(response) {
-		console.log(response);
-		});
-
+  console.log(W3W2Coords('prom.cape.test'));
 </script>
   </head>
   <body>
