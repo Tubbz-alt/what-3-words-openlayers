@@ -67,13 +67,15 @@
  */
   map.on('click', function(evt) {
     var coordinate = evt.coordinate;
-    
     //var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
     //    coordinate, 'EPSG:3857', 'EPSG:4326'));
-    var coordinateLatLong = ol.proj.transform(coordinate,'EPSG:3857', 'EPSG:4326');
+    var coordXY = ol.proj.transform(coordinate,'EPSG:3857', 'EPSG:4326');
+
+    var coordYX = [coordXY[1],coordXY[0]];
+    var coordStringYX = ol.coordinate.toStringXY(coordYX,10);
+    console.log(coordYX);
     
-    var template = '{y}, {x}';
-    var coordStringYX = ol.coordinate.format(coordinateLatLong, template);
+
     console.log(coordStringYX);
     var data = {
       'key': api,
@@ -83,7 +85,7 @@
     
     $.post('http://api.what3words.com/position', data, function(response) {
        
-       console.log(response.words);
+       alert(response.words);
     });
 
 
